@@ -31,7 +31,8 @@ export async function middleware(request: NextRequest) {
         }
     );
 
-    await supabase.auth.getUser();
+    // IMPORTANT: This line is required for Supabase to refresh cookies!
+    const { data: { user } } = await supabase.auth.getUser();
 
     return response;
 }
